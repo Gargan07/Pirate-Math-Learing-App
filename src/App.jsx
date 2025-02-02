@@ -1,9 +1,9 @@
 import React from "react";
-import LandingPage from "./pages/LandingPage"; // Import LandingPage component
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <LandingPage />
     </div>
   );
