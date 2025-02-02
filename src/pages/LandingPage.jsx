@@ -1,21 +1,13 @@
 import React from "react";
-<<<<<<< Updated upstream
+import { Link, useNavigate } from "react-router-dom"; // Import router components
 import "../styles/LandingPage.css"; // Import CSS
-=======
-import { Link, useNavigate } from "react-router-dom";
-import "../styles/LandingPage.css";
 import pirateVideo from "../assets/pirate.mp4";
 import logoImage from "../assets/logo.png";
->>>>>>> Stashed changes
 
 const LandingPage = () => {
   const navigate = useNavigate(); // Enables navigation
 
   return (
-<<<<<<< Updated upstream
-    <div className="landing-container">
-      {/* Navigation Bar*/}
-=======
     <div className="page-container">
       <video autoPlay loop muted className="background-video">
         <source src={pirateVideo} type="video/mp4" />
@@ -23,7 +15,6 @@ const LandingPage = () => {
       </video>
 
       {/* Navigation Bar */}
->>>>>>> Stashed changes
       <nav className="navbar">
         <div className="logo">🏴‍☠️ Pi-RATE</div>
         <div className="nav-links">
@@ -33,21 +24,8 @@ const LandingPage = () => {
         </div>
       </nav>
 
-      {/* Main Content*/}
+      {/* Main Content */}
       <div className="content">
-<<<<<<< Updated upstream
-        <h1>SOLVE, SAIL, CONQUER!</h1>
-        <p>
-          Pi-RATE is an exciting math game for kids! Set sail on a sea of fun,
-          solve math puzzles, and unlock treasures as you sharpen your skills
-          along the way!
-        </p>
-        
-        {/* Buttons Section*/}
-        <div className="buttons">
-          <button className="btn">Practice</button>
-          <button className="btn primary">Play Now</button>
-=======
         <div className="logo-container">
           <img src={logoImage} alt="Logo" className="logo" />
         </div>
@@ -62,7 +40,6 @@ const LandingPage = () => {
           <button className="btn" onClick={() => navigate("/set-sail")}>
             Set Sail Now!
           </button>
->>>>>>> Stashed changes
         </div>
       </div>
     </div>
