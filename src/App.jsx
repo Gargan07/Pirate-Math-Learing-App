@@ -1,13 +1,4 @@
 import React from "react";
-<<<<<<< Updated upstream
-import LandingPage from "./pages/LandingPage"; // Import LandingPage component
-
-function App() {
-  return (
-    <div>
-      <LandingPage />
-    </div>
-=======
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Practice from "./pages/Practice";
@@ -28,7 +19,6 @@ function App() {
         <Route path="/settings" element={<Settings />} />
       </Routes>
     </Router>
->>>>>>> Stashed changes
   );
 }
 
