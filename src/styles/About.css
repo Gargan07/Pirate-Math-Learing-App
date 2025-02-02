@@ -1,0 +1,38 @@
+.about-container {
+    text-align: center;
+    padding: 50px;
+    background-color: #f8f1e4; /* Light parchment-like background */
+    color: #4a2c16;
+    font-family: "Georgia", serif;
+  }
+  
+  /* Team Section */
+  .team-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  .team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Placeholder for Missing Images */
+  .profile-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: bold;
+    background-color: #8b4513;
+    color: white;
+  }
+  
