@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/LandingPage.css"; // Import the LandingPage CSS from the correct path
 import pirateVideo from "../assets/pirate.mp4"; // Ensure the pirate video is correctly imported
 import logoImage from "../assets/logo.png"; // Import logo image correctly if it's used in the component
 
 const LandingPage = () => {
+  const navigate = useNavigate(); // Initialize navigate function
+
   return (
     <div className="page-container">
       {/* Background Video */}
@@ -14,7 +17,7 @@ const LandingPage = () => {
 
       {/* Navigation Bar */}
       <nav className="navbar">
-        <div className="nav-links">
+        <div className="nav-links flex justify-end space-x-4 p-4">
           <a href="#">About</a>
           <a href="#">Contact</a>
           <a href="#">Settings</a>
@@ -34,7 +37,9 @@ const LandingPage = () => {
         {/* Buttons Section */}
         <div className="buttons">
           <button className="btn">Practice Your Skills</button>
-          <button className="btn">Set Sail Now!</button>
+          <button className="btn" onClick={() => navigate("/levels")}>
+            Set Sail Now!
+          </button>
         </div>
       </div>
     </div>
