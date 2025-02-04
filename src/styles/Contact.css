@@ -1,56 +1,66 @@
 .contact-container {
-    text-align: center;
-    padding: 50px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .contact-title {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .contact-form {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .contact-input {
-    width: 300px;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .contact-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #8b4513;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .contact-btn:hover {
-    background-color: #a0522d;
-  }
-  
-  /* Back Button */
-  .back-btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #555;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .back-btn:hover {
-    background-color: #777;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  padding: 50px;
+  font-family: Arial, sans-serif;
+}
+
+/* Title */
+.contact-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Contact Form */
+.contact-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Input Fields */
+.contact-input {
+  width: 300px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Submit Button */
+.contact-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #8b4513;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.contact-btn:hover {
+  background-color: #a0522d;
+}
+
+/* Back Button */
+.back-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #555;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.back-btn:hover {
+  background-color: #777;
+}
