@@ -143,4 +143,5 @@
   width: 200px; /* Adjust logo size */
   height: auto; /* Maintain aspect ratio */
   display: block;
-  margin: 0 auto; /* Center the logo horizontally *
+  margin: 0 auto; /* Center the logo horizontally */
+}
