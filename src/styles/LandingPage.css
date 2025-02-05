@@ -60,13 +60,11 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
+/* Nav Links - Montserrat Font */
 .nav-links {
   display: flex;
   gap: 20px;
-  align-items: center; /* Ensures vertical alignment */
-  margin-left: auto; /* Pushes the links to the right */
 }
-
 
 .nav-links a {
   font-family: "Montserrat", sans-serif; /* Apply Montserrat */
@@ -145,46 +143,4 @@
   width: 200px; /* Adjust logo size */
   height: auto; /* Maintain aspect ratio */
   display: block;
-  margin: 0 auto; /* Center the logo horizontally */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .content h1 {
-    font-size: 2.5rem;
-  }
-
-  .nav-links a {
-    font-size: 16px;
-  }
-
-  .btn {
-    font-size: 14px;
-    padding: 10px 20px;
-  }
-
-  .navbar {
-    padding: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .content h1 {
-    font-size: 2rem;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .navbar {
-    padding: 10px;
-  }
-
-  .btn {
-    width: 100%;
-    font-size: 14px;
-    padding: 12px;
-  }
-}
+  margin: 0 auto; /* Center the logo horizontally *

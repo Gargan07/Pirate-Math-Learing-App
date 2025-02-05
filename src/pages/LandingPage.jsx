@@ -1,11 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import "../styles/LandingPage.css"; // Import the LandingPage CSS from the correct path
-import pirateVideo from "../assets/pirate.mp4"; // Ensure the pirate video is correctly imported
-import logoImage from "../assets/logo.png"; // Import logo image correctly if it's used in the component
+import { Link, useNavigate } from "react-router-dom"; // Import router components
+import "../styles/LandingPage.css"; // Import CSS
+import pirateVideo from "../assets/pirate.mp4"; // Import the pirate video
+import logoImage from "../assets/logo.png"; // Import logo image
 
 const LandingPage = () => {
-  const navigate = useNavigate(); // Initialize navigate function
+  const navigate = useNavigate(); // Enables navigation
 
   return (
     <div className="page-container">
@@ -17,10 +17,10 @@ const LandingPage = () => {
 
       {/* Navigation Bar */}
       <nav className="navbar">
-        <div className="nav-links flex justify-end space-x-4 p-4">
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-          <a href="#">Settings</a>
+        <div className="nav-links">
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/settings">Settings</Link>
         </div>
       </nav>
 
@@ -36,8 +36,10 @@ const LandingPage = () => {
 
         {/* Buttons Section */}
         <div className="buttons">
-          <button className="btn">Practice Your Skills</button>
-          <button className="btn" onClick={() => navigate("/levels")}>
+          <button className="btn" onClick={() => navigate("/practice")}>
+            Practice Your Skills
+          </button>
+          <button className="btn" onClick={() => navigate("/set-sail")}>
             Set Sail Now!
           </button>
         </div>
