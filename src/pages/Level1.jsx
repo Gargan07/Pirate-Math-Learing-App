@@ -104,7 +104,12 @@ function Level1() {
                         </button>
                     ))}
                 </div>
-            </div>
+                {/* Instructions at the Bottom */}
+          <div className="instructions">
+          <p>Choose your answer for this question.</p>
+          <p>Tick-tock! The bomb is ticking!</p>
+        </div>
+      </div>
         </div>
     );
 }

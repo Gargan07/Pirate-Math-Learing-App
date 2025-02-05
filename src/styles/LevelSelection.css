@@ -1,60 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .level-selection-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 150vh; /* Ensures full-page centering */
-    text-align: center;
-    position: relative;
-    z-index: 2; /* Keeps content above background video */
-  }
-  
-  .level-title {
-    font-size: 5rem;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 4rem;
-  }
-  
-  .levels-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4rem;
-    flex-wrap: wrap;
-    max-width: 800px;
-  }
-  
-  .level-card {
-    width: 200px;
-    height: 250px;
-    border: 4px solid #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-    transition: transform 0.2s ease-in-out;
-    cursor: pointer;
-    text-align: center;
-  }
-  
-  .level-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .level-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-  }
-  
-  .level-card h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ffffff;
-    margin-top: 10px;
-  }
-  
-  /* Full Page Setup */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Adjusted for better centering */
+  text-align: center;
+  position: relative;
+  z-index: 2; /* Keeps content above background video */
+  padding: 2rem; /* Added padding for better spacing */
+}
+
+.level-title {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 3rem;
+  font-family: 'Arial', sans-serif;  /* Changed to a sans-serif font */
+}
+
+.levels-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem; /* Reduced gap for better alignment */
+  flex-wrap: wrap;
+  max-width: 900px; /* Increased max width for better responsiveness */
+}
+
+.level-card {
+  width: 230px; /* Slightly increased for better proportions */
+  height: 260px;
+  border: 4px solid #ffffff;
+  border-radius: 12px; /* More rounded edges for a modern look */
+  overflow: hidden;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.1); /* Subtle background */
+}
+
+.level-card:hover {
+  transform: scale(1.07);
+}
+
+.level-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.level-card h2 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-top: 12px;
+}
+
+/* Full Page Setup */
 .page-container {
   position: relative;
   width: 100vw;
@@ -65,7 +70,6 @@
   align-items: center;
   justify-content: center;
 }
-
 /* Background Video */
 .background-video {
   position: absolute;
@@ -76,7 +80,6 @@
   object-fit: cover; /* Ensures video covers entire screen */
   z-index: -2; /* Keeps video behind other content */
 }
-
 /* Overlay (Transparency) */
 .page-container::before {
     content: "";
@@ -88,3 +91,45 @@
     background-color: rgba(0, 0, 0, 0.5); 
     z-index: -1; /* Sits above the video but below content */
   }
+
+/* Back Button */
+.back-button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background-color: transparent;
+  border: 2px solid white;
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px; /* Rounded edges for a modern look */
+}
+
+.back-button:hover {
+  background-color: white;
+  color: black;
+}
+
+/* Instructions styling */
+.instructions {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 25px;
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+  font-family: 'Roboto', sans-serif; /* Apply the new font */
+}
+
+/* Styling for each paragraph inside the instructions */
+.instructions p {
+  margin: 5px 0;
+  font-family: 'Roboto', sans-serif; /* Ensure consistent font for paragraphs */
+}

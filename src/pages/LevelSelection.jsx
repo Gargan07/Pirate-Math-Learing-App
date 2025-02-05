@@ -2,12 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/LevelSelection.css"; // Import the CSS file
 import pirateVideo from "../assets/pirate.mp4"; 
-import bgImage from "../assets/level1.png"; 
+import bgImage1 from "../assets/Level1.png";
+import bgImage2 from "../assets/Level2.png";
+import bgImage3 from "../assets/Level3.png"; 
 
 const levels = [
-  { id: 1, image: bgImage, title: "LEVEL 1" },
-  { id: 2, image: bgImage, title: "LEVEL 2" },
-  { id: 3, image: bgImage, title: "LEVEL 3" },
+  { id: 1, image: bgImage1, title: "LEVEL 1" },
+  { id: 2, image: bgImage2, title: "LEVEL 2" },
+  { id: 3, image: bgImage3, title: "LEVEL 3" },
 ];
 
 const LevelSelection = () => {
@@ -32,8 +34,9 @@ const LevelSelection = () => {
         </div>
       </nav>
 
-      <h1 className="text-5xl font-bold text-center text-brown-700 mt-4 flex justify-center items-center">
-        LEVELS
+      {/* Heading */}
+      <h1 className="text-5xl font-bold text-center text-brown-700 mt-4 flex justify-center items-center font-sans">
+      LEVELS
       </h1>
 
 
@@ -50,7 +53,12 @@ const LevelSelection = () => {
           </div>
         ))}
       </div>
-    </div>
+          {/* Instructions at the Bottom */}
+          <div className="instructions">
+          <p>Click on any level to begin your adventure!</p>
+          <p>Use the Back button to return to the previous page.</p>
+        </div>
+      </div>
   );
 };
 

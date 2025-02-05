@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Montserrat:wght@700&display=swap');
+
+/* Full-page Background for Level 3 */
+.level3-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/level3.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Navigation Bar */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000; /* Brown */
+    padding: 10px 20px;
+}
+
+.level-title {
+    font-family: "Montserrat", sans-serif; /* Change font */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    font-weight: bold;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* Back Button */
+.back-button {
+    font-family: "Montserrat", sans-serif; /* Change font */
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: transparent;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.back-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+/* Game Content */
+.game-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Question Box */
+.question-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3000px;
+    height: 300px;
+    background-image: url('../assets/button1.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: -200px; /* Move question upward */
+}
+
+
+/* Updated Question Text Style */
+.question-text {
+    position: absolute;
+    color: white;
+    font-size: 7rem; /* Bigger text */
+    font-family: "Montserrat", serif; /* New font */
+    font-weight: bold;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Answer Choices */
+.choices-container {
+    display: flex;
+    gap: 350px; /* More spacing for bigger images */
+    margin-top: 30px; /* Move up slightly */
+}
+
+/* Choice Buttons */
+.choice-button {
+    width: 180px; /* Bigger clickable area */
+    height: 190px;
+    background: none; /* Remove solid color */
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Enlarged Choice Images */
+.choice-image {
+    width: 250%; /* Make the image fill the button */
+    height: 250%;
+    object-fit: contain;
+}
+
+/* Updated Choice Text */
+.choice-text {
+    position: absolute;
+    top: 65%; /* Move text up slightly */
+    left: 15%;
+    transform: translate(-50%, -50%); /* Center text */
+    color: white;
+    font-size: 5.5rem; /* Bigger font */
+    font-family: "Montserrat", sans-serif; /* New readable font */
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/* Instructions styling */
+.instructions {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    font-family: 'Roboto', sans-serif; /* Apply the new font */
+  }
+  
+  /* Styling for each paragraph inside the instructions */
+  .instructions p {
+    margin: 5px 0;
+    font-family: 'Roboto', sans-serif; /* Ensure consistent font for paragraphs */
+  }
