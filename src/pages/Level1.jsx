@@ -57,6 +57,10 @@ function Level1() {
             setNum2(newNum2);
         } else {
             handleButtonReset();
+            const newNum1 = generateRandomNumber();
+            const newNum2 = generateRandomNumber();
+            setNum1(newNum1);
+            setNum2(newNum2);
         }
     };
 
