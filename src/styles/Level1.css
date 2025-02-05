@@ -20,47 +20,70 @@
 .navbar {
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #000000; /* Brown */
+    align-items: center; /* Vertically align the items */
+    background-color: #000000; /* Black background */
     padding: 10px 20px;
+    box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
+/* Left side (Level Title and Back Button) */
+.nav-left {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    gap: 20px; /* Space between the title and the back button */
+}
+
+/* Level Title */
 .level-title {
-    font-family: "Montserrat", sans-serif; /* Change font */
+    font-family: "Montserrat", sans-serif;
     color: white;
     font-size: 20px;
     font-weight: bold;
 }
 
-.nav-links a {
-    color: white;
-    font-weight: bold;
-    margin-left: 20px;
-    text-decoration: none;
-}
-
-.nav-links a:hover {
-    text-decoration: underline;
-}
-
 /* Back Button */
 .back-button {
-    font-family: "Montserrat", sans-serif; /* Change font */
-    font-size: 1rem;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1rem;
     font-weight: bold;
     color: white;
     background-color: transparent;
-    border: 1px solid rgb(255, 255, 255);
-    padding: 10px 10px;
+    border: 2px solid white;
+    padding: 12px 15px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    border-radius: 8px;
 }
 
+/* Back Button Hover Effect */
 .back-button:hover {
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+    background-color: white;
+    color: black;
 }
+
+/* Right side (Menu and Settings) */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between the menu and settings */
+    margin-left: auto; /* Push the right side to the far end */
+}
+
+/* Navigation Links (Menu and Settings) */
+.nav-link {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Nav Link Hover Effect */
+.nav-link:hover {
+    text-decoration: underline;
+}
+
+
 
 /* Game Content */
 .game-content {
