@@ -108,14 +108,27 @@
 .choice-button {
     width: 180px; /* Bigger clickable area */
     height: 190px;
-    background: none; /* Remove solid color */
+    background: none;
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    outline: none; /* Remove default browser focus outline */
 }
+
+.choice-button:focus {
+    outline: none; /* Ensures no outline on focus */
+    box-shadow: none; /* Prevents any focus-related shadow */
+}
+
+.choice-button:active {
+    outline: none; /* Removes focus outline when clicked */
+    border: none;  /* Ensures no border appears */
+    box-shadow: none; /* Avoids extra shadows */
+}
+
 
 /* Enlarged Choice Images */
 .choice-image {
@@ -136,5 +149,16 @@
     font-weight: bold;
     text-align: center;
 }
+
+.progress {
+    position: fixed;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%; /* Adjust width as needed */
+    max-width: 600px; /* Prevents it from getting too wide on large screens */
+    height: 20px;
+}
+
 
 
