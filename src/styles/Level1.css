@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Montserrat:wght@700&display=swap');
 
-/* Full-page Background */
+/* Full-page Background for Level 1 */
 .level1-container {
     position: fixed; /* Ensures it covers the entire screen */
     top: 0;
     left: 0;
-    width: 100vw; /* Ensures full width */
-    height: 100vh; /* Covers full height */
-    background-image: url('../assets/level1.png'); /* Set background */
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../assets/level1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -137,4 +137,25 @@
     text-align: center;
 }
 
-
+/* Instructions styling */
+.instructions {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 30px;
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    font-family: 'Roboto', sans-serif; /* Apply the new font */
+  }
+  
+  /* Styling for each paragraph inside the instructions */
+  .instructions p {
+    margin: 5px 0;
+    font-family: 'Roboto', sans-serif; /* Ensure consistent font for paragraphs */
+  }
