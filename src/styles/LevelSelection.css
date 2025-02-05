@@ -54,3 +54,37 @@
     margin-top: 10px;
   }
   
+  /* Full Page Setup */
+.page-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background Video */
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures video covers entire screen */
+  z-index: -2; /* Keeps video behind other content */
+}
+
+/* Overlay (Transparency) */
+.page-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: -1; /* Sits above the video but below content */
+  }
