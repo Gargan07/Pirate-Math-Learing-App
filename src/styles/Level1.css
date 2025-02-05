@@ -163,7 +163,7 @@
 
 .progress {
     position: fixed;
-    top: 85%;
+    top: 78%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%; /* Adjust width as needed */
