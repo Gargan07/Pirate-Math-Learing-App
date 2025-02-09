@@ -26,14 +26,12 @@ const LevelSelection = () => {
   </video>
 
   {/* Navigation Bar */}
-  <div className="level-selection-navbar">
-    <nav className="navbar">
+    <nav className="level-selection-navbar">
       <div className="nav-links flex justify-between p-4 w-full">
         <button className="back-button" onClick={() => navigate(-1)}>Back</button>
         <a href="Settings" className="nav-link">Settings</a>
       </div>
     </nav>
-  </div>
 
   {/* Heading */}
   <h1 className="level-selection-heading">LEVELS</h1>
