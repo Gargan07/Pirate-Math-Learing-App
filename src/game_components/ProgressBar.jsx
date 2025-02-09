@@ -5,7 +5,7 @@ export const ProgressBar = () => {
     const [progress, setProgress] = useState(0);
 
     const handleButtonClick = () => {
-        const newProgress = Math.min(100, Math.ceil(progress + 33.33));
+        const newProgress = Math.min(100, Math.ceil(progress + 20));
         setProgress(newProgress);
     };
     
