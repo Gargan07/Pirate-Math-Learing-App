@@ -1,114 +1,183 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Level4.css";
-import choicesImg from "../assets/choices.png"; 
+import choicesImg from "../assets/choices.png";
 import { ProgressBar } from "../game_components/ProgressBar";
 import "../styles/ProgressBar.css";
+import CountdownTimer from "../game_components/CountDownTimer";
 
 function Level4() {
-    const navigate = useNavigate();
-    const { progress, handleButtonClick, getColor, handleButtonReset } = ProgressBar();
+  const navigate = useNavigate();
+  const [showPenaltyAlert, setShowPenaltyAlert] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [levelComplete, setLevelComplete] = useState(false);
 
-    // State to store the equation numbers and answer
-    const [num1, setNum1] = useState(generateRandomNumber());
-    const [num2, setNum2] = useState(generateRandomNumber());
-    const [answerChoices, setAnswerChoices] = useState([]);
+  const { progress, handleButtonClick, getColor, handleButtonReset } = ProgressBar();
 
-    // Function to generate a random number between 1 and 10
-    function generateRandomNumber() {
-        return Math.floor(Math.random() * 10) + 1;
+  // State for question & answer choices
+  const [num1, setNum1] = useState(generateRandomNumber());
+  const [num2, setNum2] = useState(generateRandomNumber());
+  const [correctAnswer, setCorrectAnswer] = useState(null);
+  const [answerChoices, setAnswerChoices] = useState([]);
+
+  const timerRef = useRef();
+
+  // Function to generate random numbers (avoiding zero)
+  function generateRandomNumber() {
+    return Math.floor(Math.random() * 10) + 1;
+  }
+
+  // Function to generate answer choices with similar formatting
+  function generateAnswerChoices(correctAnswer) {
+    let choices = new Set([correctAnswer]); // Include correct answer first
+
+    // Check if correct answer has decimals
+    const isDecimal = correctAnswer % 1 !== 0;
+
+    while (choices.size < 3) {
+      let randNum = isDecimal
+        ? (Math.random() * 10).toFixed(2) // Generate decimal number
+        : Math.floor(Math.random() * 10) + 1; // Generate integer
+
+      choices.add(randNum);
     }
 
-    // Function to generate and shuffle answer choices efficiently
-    function generateAnswerChoices(correctAnswer) {
-        let choices = [correctAnswer];
-        let usedNumbers = new Set(choices);
+    return Array.from(choices).sort(() => Math.random() - 0.5);
+  }
 
-        while (choices.length < 3) {
-            let randNum = generateRandomNumber();
-            if (!usedNumbers.has(randNum)) {
-                choices.push(randNum);
-                usedNumbers.add(randNum);
-            }
-        }
+  useEffect(() => {
+    const answer = num1 / num2;
+    const formattedAnswer = answer % 1 === 0 ? answer : parseFloat(answer.toFixed(2)); // Ensure proper format
+    setCorrectAnswer(formattedAnswer);
+    setAnswerChoices(generateAnswerChoices(formattedAnswer));
+  }, [num1, num2]);
 
-        // Shuffle choices using a more optimized approach
-        return choices.sort(() => Math.random() - 0.5);
+  useEffect(() => {
+    if (progress >= 100) {
+      setLevelComplete(true);
     }
+  }, [progress]);
 
+  // Handle choice click
+  const handleChoiceClick = (selected) => {
+    const selectedAnswer = parseFloat(selected);
     
+    if (selectedAnswer === correctAnswer) {
+      handleButtonClick();
+      setNum1(generateRandomNumber());
+      setNum2(generateRandomNumber());
+    } else {
+      handleButtonReset();
+      if (timerRef.current) timerRef.current.applyPenalty();
 
-    // Update answer choices whenever num1 or num2 changes
-    useEffect(() => {
-        const correctAnswer = Math.round((num1 / num2 + Number.EPSILON) * 100) / 100;
-        setAnswerChoices(generateAnswerChoices(correctAnswer));
-    }, [num1, num2]); // Runs when num1 or num2 changes
+      // Show penalty alert
+      setShowPenaltyAlert(true);
+      setTimeout(() => setShowPenaltyAlert(false), 300);
+    }
+  };
 
-    // Function to handle choice click
-    const handleChoiceClick = (num) => {
-        if (num === num1 / num2) {
-            handleButtonClick();
-            // Generate new question & answers
-            const newNum1 = generateRandomNumber();
-            const newNum2 = generateRandomNumber();
-            setNum1(newNum1);
-            setNum2(newNum2);
-        } else {
-            handleButtonReset();
-        }
-    };
+  const handleStartGame = () => {
+    setGameStarted(true);
+    setGameOver(false);
+    setLevelComplete(false);
+    setNum1(generateRandomNumber());
+    setNum2(generateRandomNumber());
+  };
 
-    return (
-        <div className="level4-container">
-            {/* Navigation Bar */}
-            <nav className="navbar">
-                <div className="navbar-left">
-                    <button className="back-button" onClick={() => navigate(-1)}>Back</button>
-                    <span className="level-title">LEVEL 4</span>
-                </div>
-                <div className="nav-links">
-                    <a href="#">Menu</a>
-                    <a href="#">Settings</a>
-                </div>
-            </nav>
+  const handleRetry = () => {
+    setGameStarted(false);
+    setGameOver(false);
+    setLevelComplete(false);
+  };
 
-            {/* Progress Bar */}
-            <div className="progress">
-                <div className="progress-container">
-                    <div className="progress-bar">
-                        <div className="progress-bar-fill" style={{ width: `${progress}%`, backgroundColor: getColor() }}>{" "}</div>
-                    </div>
-                </div>
+  const handleBack = () => navigate(-1);
+
+  const handleNextLevel = () => navigate(`/level${4 + 1}`);
+
+  const handleTimeUp = () => setGameOver(true);
+
+  return (
+    <div className="level4-container">
+      {!gameStarted && !gameOver && !levelComplete && (
+        <div className="start-overlay" onClick={handleStartGame}>
+          <span className="start-text">Click Anywhere to Start the Game!</span>
+        </div>
+      )}
+
+      <nav className="navbar">
+        <div className="navbar-left">
+          <button className="back-button" onClick={handleBack}>Back</button>
+          <span className="level-title">LEVEL 4</span>
+        </div>
+        <div className="navbar-right">
+          <div className="nav-links">
+            <a href="#">Menu</a>
+            <a href="Settings">Settings</a>
+          </div>
+        </div>
+      </nav>
+
+      {gameStarted && !gameOver && !levelComplete && (
+        <>
+          <div className="progress">
+            <div className="progress-container">
+              <div className="progress-bar">
+                <div className="progress-bar-fill" style={{ width: `${progress}%`, backgroundColor: getColor() }}></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="timer-container">
+            <CountdownTimer ref={timerRef} onTimeUp={handleTimeUp} />
+          </div>
+
+          {showPenaltyAlert && <div className="penalty-alert">-5s Penalty Applied!</div>}
+
+          <div className="game-content">
+            <div className="question-container">
+              <span className="question-text">{num1} / {num2} =</span>
             </div>
 
-            {/* Game Content */}
-            <div className="game-content">
-                {/* Math Problem */}
-                <div className="question-container">
-                    <span className="question-text">{num1} / {num2} =</span>
-                </div>
+            <div className="choices-container">
+              {answerChoices.map((choice) => (
+                <button key={choice} className="choice-button" onClick={() => handleChoiceClick(choice)}>
+                  <img src={choicesImg} alt="Choice" className="choice-image" />
+                  <span className="choice-text">{choice}</span>
+                </button>
+              ))}
+            </div>
 
-                {/* Answer Choices */}
-                <div className="choices-container">
-                    {answerChoices.map((num) => (
-                        <button 
-                            key={num} 
-                            className="choice-button"
-                            onClick={() => handleChoiceClick(num)}
-                        >
-                            <img src={choicesImg} alt="Choice" className="choice-image" />
-                            <span className="choice-text">{num}</span>
-                        </button>
-                    ))}
-                </div>
-                {/* Instructions at the Bottom */}
-        <div className="instructions">
-        <p>Choose your answer for this question.</p>
-        <p>Tick-tock! The bomb is ticking!</p>
+            <div className="instructions">
+              <p>Choose your answer for this question.</p>
+              <p>Tick-tock! The bomb is ticking!</p>
+            </div>
+          </div>
+        </>
+      )}
+
+      {gameOver && (
+        <div className="game-over-form">
+          <h2>Game Over!</h2>
+          <div className="game-over-buttons">
+            <button onClick={handleRetry}>Retry</button>
+            <button onClick={handleBack}>Back</button>
+          </div>
         </div>
+      )}
+
+      {levelComplete && (
+        <div className="level-complete-form">
+          <h2>Level Complete!</h2>
+          <div className="level-complete-buttons">
+            <button onClick={handleBack}>Back</button>
+            <button onClick={handleNextLevel}>Next Level</button>
+            <button onClick={handleRetry}>Retry</button>
+          </div>
+        </div>
+      )}
     </div>
-        </div>
-    );
+  );
 }
 
 export default Level4;

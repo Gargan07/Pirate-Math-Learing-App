@@ -135,9 +135,11 @@ function Level1() {
           </button>
           <span className="level-title">LEVEL 1</span>
         </div>
+        <div className="navbar-right">
         <div className="nav-links">
           <a href="#">Menu</a>
           <a href="Settings">Settings</a>
+        </div>
         </div>
       </nav>
 
