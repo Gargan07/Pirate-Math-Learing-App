@@ -159,6 +159,7 @@
   .instructions p {
     margin: 5px 0;
     font-family: 'Roboto', sans-serif; /* Ensure consistent font for paragraphs */
+<<<<<<< HEAD
   }
 
   .penalty-alert {
@@ -234,4 +235,6 @@
   
   .game-over-buttons button:hover, .level-complete-buttons button:hover {
     background-color: #45a049; /* Hover effect for buttons */
+=======
+>>>>>>> 479d3ce (add bgm)
   }

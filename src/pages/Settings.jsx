@@ -1,21 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/Settings.css"; // Ensure this file exists
+import { BgmContext } from "../context/BgmContext"; 
+import "../styles/Settings.css";
 
 const Settings = () => {
   const navigate = useNavigate();
-
-  // Load sound preference from localStorage
-  const [soundOn, setSoundOn] = useState(
-    localStorage.getItem("soundSetting") === "on"
-  );
-
-  // Toggle sound state
-  const toggleSound = () => {
-    const newSoundState = !soundOn;
-    setSoundOn(newSoundState);
-    localStorage.setItem("soundSetting", newSoundState ? "on" : "off");
-  };
+  const { isPlaying, toggleBgm } = useContext(BgmContext); // ✅ Now it exists!
 
   return (
     <div className="settings-container">
@@ -25,10 +15,10 @@ const Settings = () => {
       <div className="settings-group-container">
         {/* Sound Toggle Switch */}
         <div className="toggle-container">
-          <label className="toggle-label">Sound:</label>
-          <div className="toggle-switch" onClick={toggleSound}>
-            <div className={`toggle-slider ${soundOn ? "on" : "off"}`}>
-              {soundOn ? "ON 🔊" : "OFF 🔇"}
+          <label className="toggle-label">Background Music:</label>
+          <div className="toggle-switch" onClick={toggleBgm}>
+            <div className={`toggle-slider ${isPlaying ? "on" : "off"}`}>
+              {isPlaying ? "ON 🔊" : "OFF 🔇"}
             </div>
           </div>
         </div>
