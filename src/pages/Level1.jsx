@@ -137,7 +137,7 @@ function Level1() {
         </div>
         <div className="nav-links">
           <a href="#">Menu</a>
-          <a href="#">Settings</a>
+          <a href="Settings">Settings</a>
         </div>
       </nav>
 

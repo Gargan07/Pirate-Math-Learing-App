@@ -54,7 +54,7 @@
 }
 
 /* Full Page Setup */
-.page-container {
+.level-page-container {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -75,7 +75,7 @@
   z-index: -2;
 }
 
-.page-container::before {
+.level-page-container::before {
   content: "";
   position: absolute;
   top: 0;
@@ -86,11 +86,19 @@
   z-index: -1;
 }
 
+
 .level-selection-navbar .nav-links {
+  position: fixed; /* Fix navbar to the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 30px;
   display: flex;
-  justify-content: space-between; /* Distribute items between left and right */
-  width: 100%; /* Take full width of the container */
-  padding: 0 16px; /* Add some padding to make it look better */
+  justify-content: space-between; /* Align nav items: one on the left, others on the right */
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  z-index: 1; /* Make sure navbar is above content */
 }
 
 .back-button {
@@ -104,6 +112,7 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   border-radius: 8px;
+  margin-right: auto; /* Pushes back button to the left */
 }
 
 .back-button:hover {

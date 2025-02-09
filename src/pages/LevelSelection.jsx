@@ -18,50 +18,47 @@ const LevelSelection = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="page-container relative">
-      {/* Background Video */}
-      <video autoPlay loop muted className="background-video">
-        <source src={pirateVideo} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+<div className="level-page-container relative">
+  {/* Background Video */}
+  <video autoPlay loop muted className="background-video">
+    <source src={pirateVideo} type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
-      {/* Navigation Bar */}
-      <div className="level-selection-navbar">
-        <nav className="navbar">
-          <div className="nav-links flex justify-between p-4 w-full">
-            <button className="back-button" onClick={() => navigate(-1)}>Back</button>
-            <a href="#" className="nav-link">Settings</a>
-          </div>
-        </nav>
+  {/* Navigation Bar */}
+  <div className="level-selection-navbar">
+    <nav className="navbar">
+      <div className="nav-links flex justify-between p-4 w-full">
+        <button className="back-button" onClick={() => navigate(-1)}>Back</button>
+        <a href="Settings" className="nav-link">Settings</a>
       </div>
+    </nav>
+  </div>
 
+  {/* Heading */}
+  <h1 className="level-selection-heading">LEVELS</h1>
 
-
-      {/* Heading */}
-      <h1 className="level-selection-heading">LEVELS</h1>
-
-      {/* Levels Grid */}
-      <div className="levels-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 w-full mx-auto">
-        {levels.map(({ id, image, title }) => (
-          <div 
-            key={id} 
-            className="level-card cursor-pointer transform hover:scale-105 transition duration-300" 
-            onClick={() => navigate(`/level${id}`)}
-          >
-            <img src={image} alt={`Thumbnail for ${title}`} className="w-full h-auto rounded-lg shadow-md" />
-            <h2 className="level-title text-center text-lg font-semibold mt-2">{title}</h2>
-          </div>
-        ))}
+  {/* Levels Grid */}
+  <div className="levels-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 w-full mx-auto">
+    {levels.map(({ id, image, title }) => (
+      <div 
+        key={id} 
+        className="level-card cursor-pointer transform hover:scale-105 transition duration-300" 
+        onClick={() => navigate(`/level${id}`)}
+      >
+        <img src={image} alt={`Thumbnail for ${title}`} className="w-full h-auto rounded-lg shadow-md" />
+        <h2 className="level-title text-center text-lg font-semibold mt-2">{title}</h2>
       </div>
+    ))}
+  </div>
 
+  {/* Instructions */}
+  <div className="instruction">
+    <p>Click on any level to begin your adventure!</p>
+    <p>Use the Back button to return to the previous page.</p>
+  </div>
+</div>
 
-
-      {/* Instructions */}
-      <div className="instruction">
-        <p>Click on any level to begin your adventure!</p>
-        <p>Use the Back button to return to the previous page.</p>
-      </div>
-    </div>
   );
 };
 
