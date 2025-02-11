@@ -8,27 +8,26 @@ import CountdownTimer from "../game_components/CountDownTimer";
 
 function Level1() {
   const navigate = useNavigate();
-  const [penalty, setPenalty] = useState(0); // Track penalty value
-  const [showPenaltyAlert, setShowPenaltyAlert] = useState(false); // Track penalty alert visibility
-  const [gameStarted, setGameStarted] = useState(false); // Track whether the game has started
-  const [gameOver, setGameOver] = useState(false); // Track if game is over
-  const [levelComplete, setLevelComplete] = useState(false); // Track if level is complete
-
+  const [showNextLevelPopup, setShowNextLevelPopup] = useState(false); // New state for popup
+  const [penalty, setPenalty] = useState(0);
+  const [showPenaltyAlert, setShowPenaltyAlert] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [levelComplete, setLevelComplete] = useState(false);
+  
+  const currentLevel = 1;
   const { progress, handleButtonClick, getColor, handleButtonReset } = ProgressBar();
 
-  // State to store the equation numbers and answer
   const [num1, setNum1] = useState(generateRandomNumber());
   const [num2, setNum2] = useState(generateRandomNumber());
   const [answerChoices, setAnswerChoices] = useState([]);
 
   const timerRef = useRef();
 
-  // Function to generate random numbers
   function generateRandomNumber() {
     return Math.floor(Math.random() * 10) + 1;
   }
 
-  // Function to generate and shuffle answer choices efficiently
   function generateAnswerChoices(correctAnswer) {
     let choices = [correctAnswer];
     let usedNumbers = new Set(choices);
@@ -51,47 +50,58 @@ function Level1() {
 
   useEffect(() => {
     if (progress >= 100) {
-      setLevelComplete(true); // Set level complete if progress reaches 100
+      setLevelComplete(true);
+  
+      // Retrieve unlocked levels from local storage
+      const unlockedLevels = JSON.parse(localStorage.getItem("unlockedLevels")) || {};
+  
+      // Check if the next level is already unlocked
+      const nextLevel = currentLevel + 1;
+      if (!unlockedLevels[nextLevel]) {
+        // Unlock the next level
+        unlockedLevels[nextLevel] = true;
+        localStorage.setItem("unlockedLevels", JSON.stringify(unlockedLevels));
+  
+        // Show the popup when the next level is newly unlocked
+        setShowNextLevelPopup(true);
+  
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+          setShowNextLevelPopup(false);
+        }, 3000);
+      }
     }
   }, [progress]);
+  
 
-  // Handle choice click
   const handleChoiceClick = (num) => {
     if (num === num1 + num2) {
       handleButtonClick();
-      // Generate new question & answers
-      const newNum1 = generateRandomNumber();
-      const newNum2 = generateRandomNumber();
-      setNum1(newNum1);
-      setNum2(newNum2);
-
-      setPenalty(0); // Reset penalty on correct answer
+      setNum1(generateRandomNumber());
+      setNum2(generateRandomNumber());
+      setPenalty(0);
     } else {
       handleButtonReset();
       if (timerRef.current) {
-        timerRef.current.applyPenalty(); // Apply penalty when wrong answer is clicked
+        timerRef.current.applyPenalty();
       }
-
-      // Show the penalty alert and hide it after 500ms
       setShowPenaltyAlert(true);
       setTimeout(() => {
         setShowPenaltyAlert(false);
-      }, 300); // Alert duration is 500ms
+      }, 300);
     }
   };
 
-  // Start the game when user clicks the overlay
   const handleStartGame = () => {
-    setGameStarted(true); // Game starts when clicked
-    setGameOver(false); // Reset game over state
-    setLevelComplete(false); // Reset level complete state
+    setGameStarted(true);
+    setGameOver(false);
+    setLevelComplete(false);
     setNum1(generateRandomNumber());
     setNum2(generateRandomNumber());
     setPenalty(0);
     setShowPenaltyAlert(false);
   };
 
-  // Retry the game
   const handleRetry = () => {
     setGameStarted(false);
     setGameOver(false);
@@ -102,26 +112,20 @@ function Level1() {
     setShowPenaltyAlert(false);
   };
 
-  // Go back to the previous page
   const handleBack = () => {
-    navigate(-1);
+    navigate("/set-sail");
   };
 
-  // Go to the next level (level 2 in this case)
   const handleNextLevel = () => {
-    const currentLevel = 1; // You can dynamically set this based on the current level (e.g., from a prop or state)
-    const nextLevel = currentLevel + 1;
-    navigate(`/level${nextLevel}`);
+    navigate(`/level${currentLevel + 1}`);
   };
 
-  // Handle game over logic when time runs out
   const handleTimeUp = () => {
-    setGameOver(true); // Set gameOver to true when time is up
+    setGameOver(true);
   };
 
   return (
     <div className="level1-container">
-      {/* Start Game Overlay */}
       {!gameStarted && !gameOver && !levelComplete && (
         <div className="start-overlay" onClick={handleStartGame}>
           <span className="start-text">Click Anywhere to Start the Game!</span>
@@ -136,10 +140,10 @@ function Level1() {
           <span className="level-title">LEVEL 1</span>
         </div>
         <div className="navbar-right">
-        <div className="nav-links">
-          <a href="#">Menu</a>
-          <a href="Settings">Settings</a>
-        </div>
+          <div className="nav-links">
+            <a href="#">Menu</a>
+            <a href="Settings">Settings</a>
+          </div>
         </div>
       </nav>
 
@@ -160,7 +164,6 @@ function Level1() {
             <CountdownTimer ref={timerRef} onTimeUp={handleTimeUp} />
           </div>
 
-          {/* Red Overlay Alert for penalty */}
           {showPenaltyAlert && (
             <div className="penalty-alert">
               <span>-5s Penalty Applied!</span>
@@ -184,16 +187,10 @@ function Level1() {
                 </button>
               ))}
             </div>
-
-            <div className="instructions">
-              <p>Choose your answer for this question.</p>
-              <p>Tick-tock! The bomb is ticking!</p>
-            </div>
           </div>
         </>
       )}
 
-      {/* Game Over Form */}
       {gameOver && (
         <div className="game-over-form">
           <h2>Game Over!</h2>
@@ -204,7 +201,6 @@ function Level1() {
         </div>
       )}
 
-      {/* Level Complete Form */}
       {levelComplete && (
         <div className="level-complete-form">
           <h2>Level Complete!</h2>
@@ -214,6 +210,10 @@ function Level1() {
             <button onClick={handleRetry}>Retry</button>
           </div>
         </div>
+      )}
+
+      {showNextLevelPopup && (
+        <div className="next-level-popup">Next Level Unlocked!</div>
       )}
     </div>
   );

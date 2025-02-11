@@ -8,11 +8,13 @@ import CountdownTimer from "../game_components/CountDownTimer";
 
 function Level4() {
   const navigate = useNavigate();
+  const [showNextLevelPopup, setShowNextLevelPopup] = useState(false); // New state for popup
   const [showPenaltyAlert, setShowPenaltyAlert] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [levelComplete, setLevelComplete] = useState(false);
 
+  const currentLevel = 4; // Track current level
   const { progress, handleButtonClick, getColor, handleButtonReset } = ProgressBar();
 
   // State for question & answer choices
@@ -56,6 +58,25 @@ function Level4() {
   useEffect(() => {
     if (progress >= 100) {
       setLevelComplete(true);
+  
+      // Retrieve unlocked levels from local storage
+      const unlockedLevels = JSON.parse(localStorage.getItem("unlockedLevels")) || {};
+  
+      // Check if the next level is already unlocked
+      const nextLevel = currentLevel + 1;
+      if (!unlockedLevels[nextLevel]) {
+        // Unlock the next level
+        unlockedLevels[nextLevel] = true;
+        localStorage.setItem("unlockedLevels", JSON.stringify(unlockedLevels));
+  
+        // Show the popup when the next level is newly unlocked
+        setShowNextLevelPopup(true);
+  
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+          setShowNextLevelPopup(false);
+        }, 3000);
+      }
     }
   }, [progress]);
 
@@ -91,9 +112,9 @@ function Level4() {
     setLevelComplete(false);
   };
 
-  const handleBack = () => navigate(-1);
+  const handleBack = () => navigate("/set-sail");
 
-  const handleNextLevel = () => navigate(`/level${4 + 1}`);
+  const handleNextLevel = () => navigate(`/level${currentLevel + 1}`);
 
   const handleTimeUp = () => setGameOver(true);
 
@@ -175,6 +196,10 @@ function Level4() {
             <button onClick={handleRetry}>Retry</button>
           </div>
         </div>
+      )}
+
+      {showNextLevelPopup && (
+        <div className="next-level-popup">All Levels Completed!</div>
       )}
     </div>
   );

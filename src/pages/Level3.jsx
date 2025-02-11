@@ -8,12 +8,14 @@ import CountdownTimer from "../game_components/CountDownTimer";
 
 function Level3() {
   const navigate = useNavigate();
+  const [showNextLevelPopup, setShowNextLevelPopup] = useState(false); // New state for popup
   const [penalty, setPenalty] = useState(0); // Track penalty value
   const [showPenaltyAlert, setShowPenaltyAlert] = useState(false); // Track penalty alert visibility
   const [gameStarted, setGameStarted] = useState(false); // Track whether the game has started
   const [gameOver, setGameOver] = useState(false); // Track if game is over
   const [levelComplete, setLevelComplete] = useState(false); // Track if level is complete
 
+  const currentLevel = 3; // Track current level
   const { progress, handleButtonClick, getColor, handleButtonReset } = ProgressBar();
 
   // State to store the equation numbers and answer
@@ -52,7 +54,26 @@ function generateAnswerChoices(correctAnswer) {
 
   useEffect(() => {
     if (progress >= 100) {
-      setLevelComplete(true); // Set level complete if progress reaches 100
+      setLevelComplete(true);
+  
+      // Retrieve unlocked levels from local storage
+      const unlockedLevels = JSON.parse(localStorage.getItem("unlockedLevels")) || {};
+  
+      // Check if the next level is already unlocked
+      const nextLevel = currentLevel + 1;
+      if (!unlockedLevels[nextLevel]) {
+        // Unlock the next level
+        unlockedLevels[nextLevel] = true;
+        localStorage.setItem("unlockedLevels", JSON.stringify(unlockedLevels));
+  
+        // Show the popup when the next level is newly unlocked
+        setShowNextLevelPopup(true);
+  
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+          setShowNextLevelPopup(false);
+        }, 3000);
+      }
     }
   }, [progress]);
 
@@ -105,12 +126,11 @@ function generateAnswerChoices(correctAnswer) {
 
   // Go back to the previous page
   const handleBack = () => {
-    navigate(-1);
+    navigate("/set-sail");
   };
 
   // Go to the next level (level 2 in this case)
   const handleNextLevel = () => {
-    const currentLevel = 1; // You can dynamically set this based on the current level (e.g., from a prop or state)
     const nextLevel = currentLevel + 1;
     navigate(`/level${nextLevel}`);
   };
@@ -216,6 +236,11 @@ function generateAnswerChoices(correctAnswer) {
           </div>
         </div>
       )}
+
+      {showNextLevelPopup && (
+        <div className="next-level-popup">Next Level Unlocked!</div>
+      )}
+      
     </div>
   );
 }
