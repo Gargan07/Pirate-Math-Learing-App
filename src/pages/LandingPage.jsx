@@ -46,8 +46,8 @@ const LandingPage = () => {
         </div>
         <h1>Solve, Sail, and Conquer!</h1>
         <div className="buttons">
-          <motion.button className="btn" onClick={() => navigate("/practice")} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-            Practice Your Skills
+          <motion.button className="btn" onClick={() => navigate("/tutorial")} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            Tutorial
           </motion.button>
           <motion.button className="btn" onClick={() => navigate("/set-sail")} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
             Set Sail Now!
