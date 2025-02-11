@@ -5,6 +5,10 @@ import { BgmContext } from "../context/BgmContext";
 import "../styles/LandingPage.css";
 import pirateVideo from "../assets/pirate.mp4";
 import logoImage from "../assets/logo.png";
+import jaiImage from "../assets/jai.jpg";
+import justineImage from "../assets/justine.jpg";
+import mattImage from "../assets/matt.jpg";
+import eugeneImage from "../assets/eugene.jpg";
 
 // Define the fade-in-up animation variants
 const fadeInUp = {
@@ -55,35 +59,36 @@ const LandingPage = () => {
         </div>
       </motion.div>
 
-      {/* About Section */}
-      <motion.div
-        id="about"
-        className="section about-section"
-        initial="hidden"
-        whileInView="visible"
-        variants={fadeInUp}
-        viewport={{ amount: 0.3 }}
-      >
-        <h1>About Pi-RATE</h1>
-        <p>
-          Pi-RATE is an engaging and educational math adventure game designed to help elementary school students develop their math skills in a fun and interactive way. Players embark on exciting challenges that enhance their problem-solving abilities while learning important math concepts.
-        </p>
-        <h2>Meet the Team</h2>
-        <div className="team-container">
-          {[
-            { name: "Eugene Gargantilla", role: "Backend Developer" },
-            { name: "John Matthew Nisperos", role: "Backend Developer" },
-            { name: "Jairehn Arambulo", role: "Frontend Developer" },
-            { name: "Justine Dela Cruz", role: "UI/UX Designer" },
-          ].map((member, index) => (
-            <motion.div className="team-member" key={index} variants={fadeInUp}>
-              <div className="profile-placeholder">{member.name.charAt(0)}</div>
-              <h3>{member.name}</h3>
-              <p>{member.role}</p>
-            </motion.div>
-          ))}
-        </div>
+  {/* About Section */}
+<motion.div
+  id="about"
+  className="section about-section visible"
+  initial="hidden"
+  whileInView="visible"
+  variants={fadeInUp}
+  viewport={{ amount: 0.1 }}
+>
+  <h1>About Pi-RATE</h1>
+  <p>
+    Pi-RATE is an engaging and educational math adventure game designed to help elementary school students develop their math skills in a fun and interactive way. Players embark on exciting challenges that enhance their problem-solving abilities while learning important math concepts.
+  </p>
+  <h2>Meet the Team</h2>
+  <div className="team-container">
+    {[
+      { name: "Eugene Gargantilla", role: "Backend Developer", image: eugeneImage },
+      { name: "John Matthew Nisperos", role: "Backend Developer", image: mattImage },
+      { name: "Jairehn Arambulo", role: "Frontend Developer", image: jaiImage },
+      { name: "Justine Dela Cruz", role: "UI/UX Designer", image: justineImage },
+    ].map((member, index) => (
+      <motion.div className="team-member" key={index} variants={fadeInUp}>
+        <img src={member.image} alt={member.name} className="team-member-image" />
+        <h3>{member.name}</h3>
+        <p>{member.role}</p>
       </motion.div>
+    ))}
+  </div>
+</motion.div>
+
 
       {/* Contact Section */}
       <motion.div
