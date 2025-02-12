@@ -17,7 +17,6 @@ const levels = [
 const LevelSelection = () => {
   const navigate = useNavigate();
   const [unlockedLevels, setUnlockedLevels] = useState({});
-
   // Load unlocked levels from localStorage
   useEffect(() => {
     // Check if this is the first run after restarting the dev server
@@ -28,6 +27,7 @@ const LevelSelection = () => {
       sessionStorage.setItem("initialized", "true"); // Mark as initialized for this session
     }
 
+    localStorage.removeItem("countdownTime");
     // Load unlocked levels
     const storedLevels = JSON.parse(localStorage.getItem("unlockedLevels")) || { 1: true };
     setUnlockedLevels(storedLevels);

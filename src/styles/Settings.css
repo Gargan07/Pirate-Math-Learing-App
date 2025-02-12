@@ -43,19 +43,21 @@
 /* Toggle Switch Wrapper */
 .toggle-switch {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* Align slider to the left by default */
   align-items: center;
   cursor: pointer;
   width: 150px;
-  height: 40px;
+  height: 45px;
   border-radius: 20px;
   background-color: #dcdcdc; /* Light gray background */
+  position: relative; /* Ensure absolute positioning inside */
   transition: background-color 0.3s ease;
 }
 
+/* Toggle Slider */
 .toggle-slider {
-  width: 60%;
-  height: 100%;
+  width: 50%; /* Adjust to fit properly inside the toggle */
+  height: 100%; /* Slightly smaller than the toggle container */
   border-radius: 20px;
   background-color: #8b4513; /* Brown color for "on" state */
   color: white;
@@ -64,19 +66,22 @@
   align-items: center;
   font-size: 16px;
   font-weight: bold;
-  transition: transform 0.3s ease;
+  position: absolute;
+  left: 5px; /* Default position on the left */
+  transition: left 0.3s ease-in-out;
 }
 
-/* On and Off state colors */
+/* On and Off state positioning */
 .toggle-slider.on {
   background-color: #8b4513; /* Brown color */
-  transform: translateX(50%);
+  left: calc(100% - 50% - 1px); /* Move to the right properly */
 }
 
 .toggle-slider.off {
   background-color: #4a2c16; /* Dark brown color */
-  transform: translateX(0);
+  left: 1px; /* Reset to left */
 }
+
 
 /* Back Button */
 .back-btn {

@@ -2,7 +2,9 @@ import React from "react";
 import { useState } from "react";
 
 export const ProgressBar = () => {
-    const [progress, setProgress] = useState(0);
+    const [progress, setProgress] = useState(
+        localStorage.getItem("progress") ? parseInt(localStorage.getItem("progress")) : 0
+    );
 
     const handleButtonClick = () => {
         const newProgress = Math.min(100, Math.ceil(progress + 20));
@@ -13,6 +15,9 @@ export const ProgressBar = () => {
         setProgress(0);
     };
 
+    const storeProgress = () => {
+        localStorage.setItem("progress", progress);
+    };
 
     const getColor = () => {
         if (progress < 50) {
@@ -29,6 +34,7 @@ export const ProgressBar = () => {
         handleButtonClick,
         getColor,
         handleButtonReset,
+        storeProgress
     };
 };
 

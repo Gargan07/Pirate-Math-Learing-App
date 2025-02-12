@@ -1,41 +1,44 @@
-// CountdownTimer Component
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from "react";
-import "../styles/CountdownTimer.css"; // Import the CSS
+import "../styles/CountdownTimer.css";
 
 const CountdownTimer = forwardRef(({ onTimeUp }, ref) => {
-  const [time, setTime] = useState(60); // Start countdown from 60 seconds
+  const storedTime = localStorage.getItem("countdownTime");
+  const [time, setTime] = useState(storedTime ? parseInt(storedTime, 10) : 60);
 
-  // Method to apply penalty by 5 seconds
   const applyPenalty = () => {
-    setTime((prevTime) => Math.max(prevTime - 5, 0)); // Apply a -5 seconds penalty
+    setTime((prevTime) => {
+      const newTime = Math.max(prevTime - 5, 0);
+      localStorage.setItem("countdownTime", newTime);
+      return newTime;
+    });
   };
 
-  // Expose the applyPenalty method to parent component through the ref
   useImperativeHandle(ref, () => ({
-    applyPenalty
+    applyPenalty,
   }));
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTime((prevTime) => {
         if (prevTime > 0) {
-          return prevTime - 1; // Decrease time by 1 second
+          const newTime = prevTime - 1;
+          localStorage.setItem("countdownTime", newTime);
+          return newTime;
         } else {
-          clearInterval(interval); // Stop the timer when it reaches 0
-          onTimeUp(); // Trigger game over in parent component when time is up
+          clearInterval(interval);
+          localStorage.removeItem("countdownTime");
+          onTimeUp();
           return 0;
         }
       });
     }, 1000);
 
-    return () => clearInterval(interval); // Cleanup interval on component unmount
+    return () => clearInterval(interval);
   }, [onTimeUp]);
 
   return (
-    <div className="timer-container">
-      <div className="overlay">
-        <span className="timer">{time}</span>
-      </div>
+    <div className="overlay">
+      <span className="timer">{time}</span>
     </div>
   );
 });

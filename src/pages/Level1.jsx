@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Level1.css";
 import choicesImg from "../assets/choices.png";
 import { ProgressBar } from "../game_components/ProgressBar";
@@ -16,8 +16,8 @@ function Level1() {
   const [levelComplete, setLevelComplete] = useState(false);
   
   const currentLevel = 1;
-  const { progress, handleButtonClick, getColor, handleButtonReset } = ProgressBar();
-
+  const { progress, handleButtonClick, getColor, handleButtonReset, storeProgress } = ProgressBar();
+  
   const [num1, setNum1] = useState(generateRandomNumber());
   const [num2, setNum2] = useState(generateRandomNumber());
   const [answerChoices, setAnswerChoices] = useState([]);
@@ -113,6 +113,7 @@ function Level1() {
   };
 
   const handleBack = () => {
+    localStorage.removeItem("progress");
     navigate("/set-sail");
   };
 
@@ -141,8 +142,7 @@ function Level1() {
         </div>
         <div className="navbar-right">
           <div className="nav-links">
-            <a href="#">Menu</a>
-            <a href="Settings">Settings</a>
+            <Link to="/settings" onClick={storeProgress}>Settings</Link>
           </div>
         </div>
       </nav>

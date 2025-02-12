@@ -1,29 +1,40 @@
 .timer-container {
   position: absolute;
-  top: -19%; /* Position at the top of the parent container */
-  left: 75%; /* Center horizontally */
-  transform: translateX(-50%); /* Adjust back by 50% of the element's width to center it */
-  width: 80%; /* Adjust width as needed */
-  height: 100vh; /* Full height of the viewport */
-  background-image: url('https://via.placeholder.com/800'); /* Your image URL */
-  background-size: cover;
-  background-position: center;
+  top: 70px; /* Adjusted to be below the navbar */
+  left: 95%;
+  transform: translateX(-50%);
+  width: 180px; /* Set a reasonable width */
+  height: auto;
+  padding: 10px;
+  border-radius: 10px;
+  z-index: 10; /* Ensures it stays above other content */
 }
 
+/* Centers the timer text */
 .overlay {
-  position: absolute;
-  top: 50%; /* Center vertically within the container */
-  left: 50%; /* Center horizontally within the container */
-  transform: translate(-50%, -50%); /* Adjust back to perfectly center */
-  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .timer {
-  font-size: 75px;
+  font-size: 50px; /* Adjust size */
   font-weight: bold;
   color: white;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Optional: adds shadow for better visibility */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .timer-container {
+    left: 50%;
+    top: 70px; /* Adjust for smaller screens */
+    width: 140px;
+  }
 
-
+  .timer {
+    font-size: 35px;
+  }
+}
