@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import pirateTut from "../assets/pirateTut.mp4";  // Assuming you have the tutorial video file
 import "../styles/Tutorial.css";
 
@@ -19,7 +19,7 @@ const Tutorial = () => {
       <nav className="level-selection-navbar">
         <div className="nav-links">
           <button className="back-button" onClick={() => navigate("/")}>Back</button>
-          <a href="/settings" className="nav-link">Settings</a>
+          <Link to="/settings">Settings</Link>
         </div>
       </nav>
 

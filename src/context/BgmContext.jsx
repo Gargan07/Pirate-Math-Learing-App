@@ -5,7 +5,7 @@ export const BgmContext = createContext();
 
 export const BgmProvider = ({ children }) => {
   const [isPlaying, setIsPlaying] = useState(
-    localStorage.getItem("bgmSetting") === "on"
+    localStorage.getItem("bgmSetting") === "off"
   );
   const audioRef = useRef(new Audio(pirateBgm));
 
