@@ -16,8 +16,6 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-localStorage.removeItem("countDownTimer");
-
 const LandingPage = () => {
   const navigate = useNavigate();
 
