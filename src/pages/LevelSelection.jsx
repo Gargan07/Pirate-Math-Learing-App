@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/LevelSelection.css"; 
 import pirateVideo from "../assets/pirate.mp4"; 
 import bgImage1 from "../assets/Level1.png";
@@ -45,7 +45,7 @@ const LevelSelection = () => {
       <nav className="level-selection-navbar">
         <div className="nav-links flex justify-between p-4 w-full">
           <button className="back-button" onClick={() => navigate("/")}>Back</button>
-          <a href="Settings" className="nav-link">Settings</a>
+          <Link to="/settings">Settings</Link>
         </div>
       </nav>
 

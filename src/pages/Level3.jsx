@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Level3.css";
 import choicesImg from "../assets/choices.png";
 import { ProgressBar } from "../game_components/ProgressBar";
@@ -16,7 +16,7 @@ function Level3() {
   const [levelComplete, setLevelComplete] = useState(false); // Track if level is complete
 
   const currentLevel = 3; // Track current level
-  const { progress, handleButtonClick, getColor, handleButtonReset } = ProgressBar();
+  const { progress, handleButtonClick, getColor, handleButtonReset, storeProgress } = ProgressBar();
 
   // State to store the equation numbers and answer
   const [num1, setNum1] = useState(generateRandomNumber());
@@ -122,15 +122,21 @@ function generateAnswerChoices(correctAnswer) {
     setNum2(generateRandomNumber());
     setPenalty(0);
     setShowPenaltyAlert(false);
+    handleButtonReset();
+    localStorage.removeItem("countdownTime");
   };
 
   // Go back to the previous page
   const handleBack = () => {
+    
+    localStorage.removeItem("progress");
     navigate("/set-sail");
   };
 
   // Go to the next level (level 2 in this case)
   const handleNextLevel = () => {
+    localStorage.removeItem("countdownTime");
+    localStorage.removeItem("progress");
     const nextLevel = currentLevel + 1;
     navigate(`/level${nextLevel}`);
   };
@@ -138,6 +144,7 @@ function generateAnswerChoices(correctAnswer) {
   // Handle game over logic when time runs out
   const handleTimeUp = () => {
     setGameOver(true); // Set gameOver to true when time is up
+    localStorage.removeItem("progress");
   };
 
   return (
@@ -158,8 +165,7 @@ function generateAnswerChoices(correctAnswer) {
         </div>
         <div className="navbar-right">
         <div className="nav-links">
-          <a href="#">Menu</a>
-          <a href="Settings">Settings</a>
+          <Link to="/settings" onClick={storeProgress}>Settings</Link>
         </div>
         </div>
       </nav>

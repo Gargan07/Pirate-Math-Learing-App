@@ -110,6 +110,8 @@ function Level1() {
     setNum2(generateRandomNumber());
     setPenalty(0);
     setShowPenaltyAlert(false);
+    handleButtonReset();
+    localStorage.removeItem("countdownTime");
   };
 
   const handleBack = () => {
@@ -118,11 +120,14 @@ function Level1() {
   };
 
   const handleNextLevel = () => {
+    localStorage.removeItem("countdownTime");
+    localStorage.removeItem("progress");
     navigate(`/level${currentLevel + 1}`);
   };
 
   const handleTimeUp = () => {
     setGameOver(true);
+    localStorage.removeItem("progress");
   };
 
   return (

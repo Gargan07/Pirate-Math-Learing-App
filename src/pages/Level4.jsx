@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Level4.css";
 import choicesImg from "../assets/choices.png";
 import { ProgressBar } from "../game_components/ProgressBar";
@@ -15,7 +15,8 @@ function Level4() {
   const [levelComplete, setLevelComplete] = useState(false);
 
   const currentLevel = 4; // Track current level
-  const { progress, handleButtonClick, getColor, handleButtonReset } = ProgressBar();
+  const { progress, handleButtonClick, getColor, handleButtonReset, storeProgress } = ProgressBar();
+    
 
   // State for question & answer choices
   const [num1, setNum1] = useState(generateRandomNumber());
@@ -110,13 +111,16 @@ function Level4() {
     setGameStarted(false);
     setGameOver(false);
     setLevelComplete(false);
+    handleButtonReset();
+    localStorage.removeItem("countdownTime");
   };
 
-  const handleBack = () => navigate("/set-sail");
+  const handleBack = () => {localStorage.removeItem("progress");navigate("/set-sail")};
 
-  const handleNextLevel = () => navigate(`/level${currentLevel + 1}`);
+  const handleNextLevel = () => navigate("/set-sail");
 
-  const handleTimeUp = () => setGameOver(true);
+  const handleTimeUp = () => {
+    localStorage.removeItem("progress");setGameOver(true)};
 
   return (
     <div className="level4-container">
@@ -133,8 +137,8 @@ function Level4() {
         </div>
         <div className="navbar-right">
           <div className="nav-links">
-            <a href="#">Menu</a>
-            <a href="Settings">Settings</a>
+            
+          <Link to="/settings" onClick={storeProgress}>Settings</Link>
           </div>
         </div>
       </nav>
